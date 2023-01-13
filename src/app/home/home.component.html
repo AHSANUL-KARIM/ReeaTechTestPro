@@ -1,0 +1,62 @@
+
+<div>
+    <mat-toolbar class="toolbar">
+      <!-- Toolbar content here -->
+      <h3>
+        Elapsed Time: {{totalPassedTime}}
+      </h3>
+  
+    </mat-toolbar>
+   
+  </div>
+  
+  <div class="toolbar">
+    <form [formGroup]="form" class="row" (ngSubmit)="submit()">
+      <div class="form-group">
+        <label>Name:</label>
+        <div>
+          <input class="form-control" type="text" formControlName="name" />
+          <small class="text-danger" *ngIf="form.get('name')?.touched && form.get('name')?.hasError('required')">
+            Name is required
+          </small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email:</label>
+        <div>
+          <input class="form-control" type="email" formControlName="email" />
+          <small class="text-danger" *ngIf="form.get('email')?.touched && form.get('email')?.hasError('email')">
+            Email is invalid
+          </small>   
+        </div> 
+      </div>
+     
+      <div class="form-group">
+        <label>Job:</label>
+        <div>
+          <select class="form-control" formControlName="job">
+            <option *ngFor="let option of jobOptions" [value]="option.value">{{option.display}}</option>
+          </select>
+          <small class="text-danger" *ngIf="form.get('job')?.touched && form.get('job')?.hasError('required')">
+            Job is required
+          </small>
+        </div>    
+      </div>
+     
+    
+      <div *ngIf="jobExperienceFieldVisible" class="form-group">
+        <label>Job Experience:</label>
+        <div>
+          <input class="form-control" type="text" formControlName="jobExperience">
+          <small class="text-danger" *ngIf="jobExperienceFieldVisible && form.get('jobExperience')?.touched && form.get('jobExperience')?.hasError('required')">
+            Job experience is required
+          </small>
+        </div>
+      </div>
+    
+      <div class="col-sm-offset-8 col-sm-3">
+        <button type="submit" [disabled]="form.invalid">Submit</button>
+  
+      </div>
+    </form>
+  </div>
